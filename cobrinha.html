@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+
+    let top1 = 0;
+    let left1 =0;
+    let cor = 0;
+
+    let subindo =false;
+    let esquerda =false;
+
+    /*tamanho 150 */
+    let lista_recentes_top =[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    let lista_recentes_left =[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+    
+
+    let position_lista_recentes_top =0;
+    let position_lista_recentes_left=0;
+
+    let last=1;
+
+    let last2 =30;
+    let last3 =60;
+    let last4=90;
+    let last5=120;
+
+    let x =0;
+    let x2=0;
+    
+
+    let iniciar = 0;
+
+
+    function a(){  
+        
+        x+= 0.02* (Math.random()- 0.5);
+        x2+=0.02* (Math.random()- 0.5);
+
+
+        if(position_lista_recentes_left>149){
+            position_lista_recentes_left =0;
+        }
+        else{
+            position_lista_recentes_left++;
+        }
+
+        if(position_lista_recentes_top>149){
+            position_lista_recentes_top=0;
+        }
+        else{
+            position_lista_recentes_top++;
+        }
+
+        if(last>149){
+            last=0;
+        }
+        else{
+            last++;
+        }
+
+
+        /*para o rabo da cobra*/
+        if(last2>149){
+            last2=0;
+        }
+        else{
+            last2++;
+        }
+        if(last3>149){
+            last3=0;
+        }
+        else{
+            last3++;
+        }
+        if(last4>149){
+            last4=0;
+        }
+        else{
+            last4++;
+        }
+        if(last5>149){
+            last5=0;
+        }
+        else{
+            last5++;
+        }
+
+
+
+        iniciar++;
+
+        lista_recentes_top[position_lista_recentes_top] = top1;
+        lista_recentes_left[position_lista_recentes_left] = left1;
+
+       
+
+       
+        
+
+        
+        /*cabeça*/
+        if(cor>3){
+            cor=0
+        }        
+        else{
+            cor++;
+        }
+        
+        if(top1>700){
+            subindo=true;
+            x=-0.002;
+        }
+        if(top1<100){
+            subindo=false;
+            x=0.002;
+        }
+
+        if(left1>1400){
+            esquerda=true;
+            x2=-0.002;
+        }
+        if(left1<100){
+            esquerda=false;
+            x2=0.002;
+        }
+
+        if( subindo==false){     
+            top1 += (Math.random() - 0.38 +x)*10;
+            
+        }
+        else{        
+            top1 += (Math.random() - 0.62 +x)*10;
+        }
+        
+        if( esquerda ==false){
+            left1+=(Math.random()-0.38 +x2)*10;
+        }   
+        else{
+            left1+=(Math.random()-0.62 +x2)*10;
+        } 
+
+        console.log(top1);
+
+        var top_texto= top1.toString();
+        var left_texto= left1.toString();
+
+        top_texto+="px";
+        left_texto+="px";
+
+        var cor_1 = Math.trunc(top1,255)/5;
+
+        var color2 = "rgb("+ cor_1.toString()+"" +"," +cor_1.toString() +","+ cor_1.toString()+")";
+
+        let cores= ["black","red","purple","green"];
+
+
+        document.getElementById("caixa1").style.top=top_texto;
+        document.getElementById("caixa1").style.left=left_texto;
+        
+        //document.getElementById("caixa1").style.backgroundColor=cores[cor];
+        document.getElementById("caixa1").style.backgroundColor=color2;
+        
+
+
+        if(iniciar>14){
+            
+        
+
+            /*rabo1*/
+
+
+
+
+
+            var top_rabo_texto= lista_recentes_top[last].toString();
+            var left_rabo_texto= lista_recentes_left[last].toString();
+
+            
+            var cor_1 = Math.trunc(lista_recentes_top[last],255)/5;
+
+            var color2 = "rgb("+ cor_1.toString()+"" +"," +cor_1.toString() +","+ cor_1.toString()+")";
+
+
+           
+
+            top_rabo_texto+="px";
+            left_rabo_texto+="px";
+
+            document.getElementById("caixa2").style.top=top_rabo_texto;
+            document.getElementById("caixa2").style.left=left_rabo_texto;
+            
+            //document.getElementById("caixa1").style.backgroundColor=cores[cor];
+            document.getElementById("caixa2").style.backgroundColor=color2;
+
+            
+
+
+
+            /*rabo2*/
+
+
+
+
+            var top_rabo_texto2= lista_recentes_top[last2].toString();
+            var left_rabo_texto2= lista_recentes_left[last2].toString();
+
+            var cor_1 = Math.trunc(lista_recentes_top[last2],255)/5;
+
+            var color2 = "rgb("+ cor_1.toString()+"" +"," +cor_1.toString() +","+ cor_1.toString()+")";
+
+
+           
+
+            top_rabo_texto2+="px";
+            left_rabo_texto2+="px";
+
+            document.getElementById("caixa3").style.top=top_rabo_texto2;
+            document.getElementById("caixa3").style.left=left_rabo_texto2;
+            
+            //document.getElementById("caixa1").style.backgroundColor=cores[cor];
+            document.getElementById("caixa3").style.backgroundColor=color2;
+
+
+
+
+            /*rabo3*/
+
+
+
+            var top_rabo_texto3= lista_recentes_top[last3].toString();
+            var left_rabo_texto3= lista_recentes_left[last3].toString();
+
+            var cor_1 = Math.trunc(lista_recentes_top[last3],255)/5;
+
+            var color2 = "rgb("+ cor_1.toString()+"" +"," +cor_1.toString() +","+ cor_1.toString()+")";
+
+
+           
+
+            top_rabo_texto3+="px";
+            left_rabo_texto3+="px";
+
+            document.getElementById("caixa4").style.top=top_rabo_texto3;
+            document.getElementById("caixa4").style.left=left_rabo_texto3;
+            
+            //document.getElementById("caixa1").style.backgroundColor=cores[cor];
+            document.getElementById("caixa4").style.backgroundColor=color2;
+
+
+
+
+
+            /*rabo4*/
+
+
+
+            var top_rabo_texto4= lista_recentes_top[last4].toString();
+            var left_rabo_texto4= lista_recentes_left[last4].toString();
+
+            var cor_1 = Math.trunc(lista_recentes_top[last4],255)/5;
+
+            var color2 = "rgb("+ cor_1.toString()+"" +"," +cor_1.toString() +","+ cor_1.toString()+")";
+
+
+           
+
+            top_rabo_texto4+="px";
+            left_rabo_texto4+="px";
+
+            document.getElementById("caixa5").style.top=top_rabo_texto4;
+            document.getElementById("caixa5").style.left=left_rabo_texto4;
+            
+            //document.getElementById("caixa1").style.backgroundColor=cores[cor];
+            document.getElementById("caixa5").style.backgroundColor=color2;
+
+
+
+
+
+
+            /*rabo5*/
+
+
+
+            var top_rabo_texto5= lista_recentes_top[last5].toString();
+            var left_rabo_texto5= lista_recentes_left[last5].toString();
+
+            var cor_1 = Math.trunc(lista_recentes_top[last5],255)/5;
+
+            var color2 = "rgb("+ cor_1.toString()+"" +"," +cor_1.toString() +","+ cor_1.toString()+")";
+
+
+           
+
+            top_rabo_texto5+="px";
+            left_rabo_texto5+="px";
+
+            document.getElementById("caixa6").style.top=top_rabo_texto5;
+            document.getElementById("caixa6").style.left=left_rabo_texto5;
+            
+            //document.getElementById("caixa1").style.backgroundColor=cores[cor];
+            document.getElementById("caixa6").style.backgroundColor=color2;
+
+
+
+
+
+        }
+
+
+    }
+
+    setInterval(a,4);
+
+
+
+    
+</script>
+
+
+<style>
+
+    .caixa{
+        height:100px;
+        width:100px;
+        position: absolute;
+        background-color:red;
+
+        border-radius:38px;
+
+
+
+        display:flex;
+        justify-content:space-evenly;
+        /*align-items:center;*/
+
+
+    }
+
+    #olho1{
+        position:relative;
+        left:1px;
+        top:36px;
+
+        border-radius:30px;
+
+        width:10px;
+        height:10px;
+        background-color: purple;
+    }
+
+    #olho2{
+        position:relative;
+        right:1px;
+        top:36px;
+
+        border-radius:30px;
+
+        width:10px;
+        height:10px;
+        background-color: purple;
+    }
+
+    #caixa2{
+        z-index: -5;
+    }
+
+    #caixa3{
+        z-index: -4;
+    }
+
+    #caixa4{
+        z-index: -3;
+    }
+
+    #caixa5{
+        z-index: -2;
+    }
+
+    #caixa6{
+        z-index: -1;
+    }
+
+</style>
+
+<body>  
+    
+    <div class="caixa" id="caixa1">
+        <div id="olho1"></div>
+        <div id="olho2"></div>    
+    </div>
+
+    <div class="caixa" id="caixa2">    
+    </div>
+    <div class="caixa" id="caixa3">    
+    </div>
+    <div class="caixa" id="caixa4">    
+    </div>
+    <div class="caixa" id="caixa5">    
+    </div>
+    <div class="caixa" id="caixa6">    
+    </div>
+
+</body>
+</html>
