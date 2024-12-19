@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+
+    let top1 = 0;
+    let left1 =0;
+    let cor = 0;
+
+    let subindo =false;
+    let esquerda =false;
+
+    /*tamanho 150 */
+    let lista_recentes_top =[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    let lista_recentes_left =[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+    
+
+    let position_lista_recentes_top =0;
+    let position_lista_recentes_left=0;
+
+    let last=1;
+
+    let last2 =30;
+    let last3 =60;
+    let last4=90;
+    let last5=120;
+
+    let x =0;
+    let x2=0;
+
+    let x3 = 0;
+    let x4 = 0;
+
+
+    let limit1 = 0;
+    let limit2 = 0;
+    
+    let velocidade =0;
+    
+    let velocidade_subindo_folhas = false;
+
+    let iniciar = 0;
+    
+    let quantidade_arbustos = 3;
+    
+    let rotacoes_folhas = [0,0,0];
+
+   //direção das folhas
+    let e2 =1;
+
+    
+    function random_green(){
+        let a ="rgb(";
+        let red = Math.round(Math.random()*100);        
+        let blue= Math.round(Math.random()*100);               
+        
+        a = a + red.toString() + ",255," +blue.toString()+")";
+        console.log(a);
+
+        return a;
+    }
+
+
+    function load(){
+        setTimeout(function(){
+            document.getElementById("fundo").style.display='none';
+        }, 5000);
+
+       
+        
+
+        let folhas = document.getElementsByClassName("folha");
+        folhas[0].style.backgroundColor =random_green();
+    }
+
+    function mover_folhas(velocidade1){
+
+        let arbustos = document.getElementsByClassName("arbusto");
+
+
+        
+
+
+        //primeiro arbusto
+        if(rotacoes_folhas[0]>20){
+            e2 = e2*(-1);
+            rotacoes_folhas[0] = 19;
+            
+        }
+        if(rotacoes_folhas[0]<2){
+            e2 = e2*(-1);
+            rotacoes_folhas[0] =3;            
+        }
+        
+        rotacoes_folhas[0]+=velocidade1* e2;
+        
+        
+        arbustos[0].style.transform ="rotate(" + rotacoes_folhas[0].toString() + "deg)";
+
+    }
+
+    
+    function a(){  
+
+        
+    
+        if(limit1>80){
+
+            limit1=1;
+        }   
+        else{limit1+= 2 ;}
+
+        if(limit2>80){
+            limit2=1;
+        }     
+        else{limit2+= 2 ;}
+
+
+        //acceleration
+        x3 = (0.02* (limit1/130) * (Math.random()- 0.5)-x*0.01* (Math.random()*2) *0.001)*(Math.random()-0.5);
+
+        if(x3>3 || x3<-3){x3=0;}
+
+        x4 = (0.02* (limit2/130) * (Math.random()- 0.5)-x2*0.01*(Math.random()*2) *0.001) *(Math.random()-0.5);
+
+        if(x4>3 || x4 <-3){x4=0;}
+        
+        x+= x3;
+        x2+=x4;
+
+
+        if(position_lista_recentes_left>149){
+            position_lista_recentes_left =0;
+        }
+        else{
+            position_lista_recentes_left++;
+        }
+
+        if(position_lista_recentes_top>149){
+            position_lista_recentes_top=0;
+        }
+        else{
+            position_lista_recentes_top++;
+        }
+
+        if(last>149){
+            last=0;
+        }
+        else{
+            last++;
+        }
+
+
+        /*para o rabo da cobra*/
+        if(last2>149){
+            last2=0;
+        }
+        else{
+            last2++;
+        }
+        if(last3>149){
+            last3=0;
+        }
+        else{
+            last3++;
+        }
+        if(last4>149){
+            last4=0;
+        }
+        else{
+            last4++;
+        }
+        if(last5>149){
+            last5=0;
+        }
+        else{
+            last5++;
+        }
+
+
+
+        iniciar++;
+
+        lista_recentes_top[position_lista_recentes_top] = top1;
+        lista_recentes_left[position_lista_recentes_left] = left1;
+
+       
+
+       
+        
+
+        
+        /*cabeça*/
+        if(cor>3){
+            cor=0
+        }        
+        else{
+            cor++;
+        }
+        
+        if(top1>700){
+            subindo=true;
+            x=-0.002;
+            x3 =0;
+        }
+        if(top1<100){
+            subindo=false;
+            x=0.002;
+            x3=0;
+        }
+
+        if(left1>1400){
+            esquerda=true;
+            x2=-0.002;
+            x4=0;
+        }
+        if(left1<100){
+            esquerda=false;
+            x2=0.002;
+            x4=0;
+        }
+
+        if( subindo==false){     
+            //top1 += (Math.random() - 0.38 +x)*10;
+            top1 += (x)*40;
+            //top1 += (x)*20*limit1*0.04;
+            
+        }
+        else{        
+            //top1 += (Math.random() - 0.62 +x)*10;
+            top1 += (x)*40;
+            //top1 += (x)*20*limit1*0.04;
+        }
+        
+        if( esquerda ==false){
+            //left1+=(Math.random()-0.38 +x2)*10;
+            left1+=(x2)*40;
+            //left1 += (x2)*20*limit2*0.4;
+        }   
+        else{
+            //left1+=(Math.random()-0.62 +x2)*10;
+            left1+=(x2)*40;
+            //left1 += (x2)*20*limit2*0.04;
+        } 
+
+        //console.log(top1);
+
+        var top_texto= top1.toString();
+        var left_texto= left1.toString();
+
+        top_texto+="px";
+        left_texto+="px";
+
+        var cor_1 = Math.trunc(top1,255)/5;
+
+        var color2 = "rgb("+ cor_1.toString()+"" +"," +cor_1.toString() +","+ cor_1.toString()+")";
+
+        let cores= ["black","red","purple","green"];
+
+
+        document.getElementById("caixa1").style.top=top_texto;
+        document.getElementById("caixa1").style.left=left_texto;
+        
+        //document.getElementById("caixa1").style.backgroundColor=cores[cor];
+        document.getElementById("caixa1").style.backgroundColor=color2;
+        
+
+
+        if(iniciar>14){
+            
+        
+
+            /*rabo1*/
+
+
+
+
+
+            var top_rabo_texto= lista_recentes_top[last].toString();
+            var left_rabo_texto= lista_recentes_left[last].toString();
+
+            
+            var cor_1 = Math.trunc(lista_recentes_top[last],255)/5;
+
+            var color2 = "rgb("+ cor_1.toString()+"" +"," +cor_1.toString() +","+ cor_1.toString()+")";
+
+
+           
+
+            top_rabo_texto+="px";
+            left_rabo_texto+="px";
+
+            document.getElementById("caixa2").style.top=top_rabo_texto;
+            document.getElementById("caixa2").style.left=left_rabo_texto;
+            
+            //document.getElementById("caixa1").style.backgroundColor=cores[cor];
+            document.getElementById("caixa2").style.backgroundColor=color2;
+
+            
+
+
+
+            /*rabo2*/
+
+
+
+
+            var top_rabo_texto2= lista_recentes_top[last2].toString();
+            var left_rabo_texto2= lista_recentes_left[last2].toString();
+
+            var cor_1 = Math.trunc(lista_recentes_top[last2],255)/5;
+
+            var color2 = "rgb("+ cor_1.toString()+"" +"," +cor_1.toString() +","+ cor_1.toString()+")";
+
+
+           
+
+            top_rabo_texto2+="px";
+            left_rabo_texto2+="px";
+
+            document.getElementById("caixa3").style.top=top_rabo_texto2;
+            document.getElementById("caixa3").style.left=left_rabo_texto2;
+            
+            //document.getElementById("caixa1").style.backgroundColor=cores[cor];
+            document.getElementById("caixa3").style.backgroundColor=color2;
+
+
+
+
+            /*rabo3*/
+
+
+
+            var top_rabo_texto3= lista_recentes_top[last3].toString();
+            var left_rabo_texto3= lista_recentes_left[last3].toString();
+
+            var cor_1 = Math.trunc(lista_recentes_top[last3],255)/5;
+
+            var color2 = "rgb("+ cor_1.toString()+"" +"," +cor_1.toString() +","+ cor_1.toString()+")";
+
+
+           
+
+            top_rabo_texto3+="px";
+            left_rabo_texto3+="px";
+
+            document.getElementById("caixa4").style.top=top_rabo_texto3;
+            document.getElementById("caixa4").style.left=left_rabo_texto3;
+            
+            //document.getElementById("caixa1").style.backgroundColor=cores[cor];
+            document.getElementById("caixa4").style.backgroundColor=color2;
+
+
+
+
+
+            /*rabo4*/
+
+
+
+            var top_rabo_texto4= lista_recentes_top[last4].toString();
+            var left_rabo_texto4= lista_recentes_left[last4].toString();
+
+            var cor_1 = Math.trunc(lista_recentes_top[last4],255)/5;
+
+            var color2 = "rgb("+ cor_1.toString()+"" +"," +cor_1.toString() +","+ cor_1.toString()+")";
+
+
+           
+
+            top_rabo_texto4+="px";
+            left_rabo_texto4+="px";
+
+            document.getElementById("caixa5").style.top=top_rabo_texto4;
+            document.getElementById("caixa5").style.left=left_rabo_texto4;
+            
+            //document.getElementById("caixa1").style.backgroundColor=cores[cor];
+            document.getElementById("caixa5").style.backgroundColor=color2;
+
+
+
+
+
+
+            /*rabo5*/
+
+
+
+            var top_rabo_texto5= lista_recentes_top[last5].toString();
+            var left_rabo_texto5= lista_recentes_left[last5].toString();
+
+            var cor_1 = Math.trunc(lista_recentes_top[last5],255)/5;
+
+            var color2 = "rgb("+ cor_1.toString()+"" +"," +cor_1.toString() +","+ cor_1.toString()+")";
+
+
+           
+
+            top_rabo_texto5+="px";
+            left_rabo_texto5+="px";
+
+            document.getElementById("caixa6").style.top=top_rabo_texto5;
+            document.getElementById("caixa6").style.left=left_rabo_texto5;
+            
+            //document.getElementById("caixa1").style.backgroundColor=cores[cor];
+            document.getElementById("caixa6").style.backgroundColor=color2;
+
+
+
+
+
+        }
+
+
+    }
+
+    setInterval(a,2);
+
+
+
+    
+</script>
+
+
+<style>
+
+    #fundo{
+        display:flex;
+        width:100%;
+        height:100%;
+
+        position:absolute;
+        z-index:100;
+
+        background-color:white;
+    }
+
+    body{
+        margin:0px;
+        background-color:grey;
+    }
+
+    .caixa{
+        height:100px;
+        width:100px;
+        position: absolute;
+        background-color:red;
+
+        border-radius:38px;
+
+
+
+        display:flex;
+        justify-content:space-evenly;
+        /*align-items:center;*/
+
+
+    }
+
+    #olho1{
+        position:relative;
+        left:1px;
+        top:36px;
+
+        border-radius:30px;
+
+        width:10px;
+        height:10px;
+        background-color: purple;
+    }
+
+    #olho2{
+        position:relative;
+        right:1px;
+        top:36px;
+
+        border-radius:30px;
+
+        width:10px;
+        height:10px;
+        background-color: purple;
+    }
+
+    #caixa2{
+        z-index: -5;
+    }
+
+    #caixa3{
+        z-index: -4;
+    }
+
+    #caixa4{
+        z-index: -3;
+    }
+
+    #caixa5{
+        z-index: -2;
+    }
+
+    #caixa6{
+        z-index: -1;
+    }
+   
+
+    .bloco{
+
+        position:absolute;
+        z-index:-1000;
+        border:20px solid black;
+        border-radius:20px;
+
+        box-shadow: 2px 2px 13px 1px blue;
+
+        background-color:white;
+        margin-top:100px;
+        margin-left:100px;
+        height:660px;
+        width:1360px;
+    }
+
+    .arbusto{
+        position:absolute;
+        top:100px;
+        left:100px;
+
+        visibility: hidden;
+
+        transform-style: preserve-3d;
+
+        height:200px;
+        width:200px;
+
+        transform: translateZ(-1000);
+
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:space-evenly;
+
+        background-color:blue;
+    }
+
+    .folha{
+
+        visibility: visible;
+       
+        /*background-color:green;*/
+        height:80px;
+        width:40px;
+        border-radius:40px;
+
+        transform: translateZ(2000);
+        
+    }
+    .nada{
+        background-color:blue;
+        height:80px;
+        width:20px;
+        border-radius:40px;
+
+    }
+    
+
+</style>
+
+<body onload = "load()">        
+
+    <div id="fundo">Carregando...</div>
+
+    <div class="bloco"></div>
+    
+    <div class="caixa" id="caixa1">
+        <div id="olho1"></div>
+        <div id="olho2"></div>    
+    </div>
+
+    <div class="caixa" id="caixa2">    
+    </div>
+    <div class="caixa" id="caixa3">    
+    </div>
+    <div class="caixa" id="caixa4">    
+    </div>
+    <div class="caixa" id="caixa5">    
+    </div>
+    <div class="caixa" id="caixa6">    
+    </div>
+
+</body>
+</html>
